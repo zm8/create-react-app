@@ -9,10 +9,10 @@ import {
 	useForceUpdate,
 	useGetWindowProps,
 	useScrollAnimation,
-} from './hook';
-import useScrollDirection from './hook/useScrollDirection';
-import usePreviousValue from './hook/usePreviousValue';
-import useGetDocumentScrollElement from './hook/useGetDocumentScrollElement';
+} from '../..';
+import useScrollDirection from '../../sensors/useScrollDirection';
+import usePreviousValue from '../../state/usePreviousValue';
+import useGetDocumentScrollElement from '../../sensors/useGetDocumentScrollElement';
 
 const useTabClickScroll = ({
 	tabBoxClass,

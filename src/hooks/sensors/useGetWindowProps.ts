@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useWindowResize from './useWindowResize';
+import useOnWindowResize from '../listen/useOnWindowResize';
 
 // 获取 window 相关属性
 export default function useGetWindowProps() {
@@ -10,7 +10,7 @@ export default function useGetWindowProps() {
 		};
 	};
 	const [obj, setObj] = useState(getWinProps);
-	useWindowResize(() => {
+	useOnWindowResize(() => {
 		setObj(getWinProps);
 	}, 100);
 	return obj;

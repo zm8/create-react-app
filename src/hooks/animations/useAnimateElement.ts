@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { useUnmount } from '.';
+import { useUnmount } from '..';
 
 type El = HTMLElement | undefined | null;
 type AnimateCallback = (el: El, timestamp: number) => void | true;

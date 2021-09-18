@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useUnmount } from '.';
+import { useUnmount } from '..';
 import useGetDocumentScrollElement from './useGetDocumentScrollElement';
-import usePreviousValue from './usePreviousValue';
+import usePreviousValue from '../state/usePreviousValue';
 
 type ScrollDirection = 'top' | 'bottom' | 'left' | 'right' | undefined;
 

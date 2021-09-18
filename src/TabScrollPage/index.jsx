@@ -1,5 +1,5 @@
 import './index.scss';
-import useTabClickScroll from './useTabClickScroll/';
+import useTabClickScroll from '../hooks/UI/useTabClickScroll';
 import React, { useEffect, useReducer, useState } from 'react';
 
 export default function TabScrollPage() {

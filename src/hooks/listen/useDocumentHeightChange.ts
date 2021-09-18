@@ -1,6 +1,6 @@
 // 监听 document height 变化
 import { useEffect, useRef } from 'react';
-import useDomReady from './useDomReady';
+import useDomReady from '../lifecycles/useDomReady';
 const getDocumentHeight = () => document.documentElement.scrollHeight;
 
 export default function useDocumentHeightChange(fn: () => void) {
