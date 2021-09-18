@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "paths": {
+      "Src/*": ["./src/*"],
+      "Common/*": ["./src/common/*"],
+      "Components/*": ["./src/components/*"],
+      "Services/*": ["./src/services/*"],
+      "Images/*": ["./src/assets/images/*"],
+      "Assets/*": ["./src/assets/*"],
+      "Lib/*": ["./src/lib/*"],
+      "Pages/*": ["./src/pages/*"],
+      "Utils/*": ["./src/utils/*"],
+      "Apis/*": ["./src/apis/*"]
+    }
+  }
+}

@@ -1,0 +1,102 @@
+$titleHeight: 60px;
+$tabHeight: 60px;
+
+.page-xxxx {
+	.page-title {
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: $titleHeight;
+		line-height: $titleHeight;
+		text-align: center;
+		width: 100%;
+		font-size: 26px;
+		font-weight: bold;
+		background-color: bisque;
+	}
+	.tab-box {
+		position: fixed;
+		left: 0;
+		top: 0;
+		margin-top: $titleHeight;
+		width: 100%;
+		overflow: auto;
+		background-color: #fff;
+		border: 1px solid green;
+		.tab-list {
+			height: $tabHeight;
+			display: flex;
+			align-items: center;
+			.tab-item {
+				flex-shrink: 0;
+				font-size: 16px;
+				padding-left: 60px;
+				padding-right: 60px;
+				&:last-child {
+					padding-right: 100px;
+				}
+			}
+			.tab-item-current {
+				color: red;
+			}
+		}
+		.tab-line {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 40px;
+			height: 5px;
+			background-color: #4b8ffb;
+			transition: all 300ms;
+			display: none;
+		}
+		.shadow-box {
+			position: fixed;
+			top: $titleHeight;
+			height: $tabHeight;
+			width: 60px;
+			background-color: rgba(255, 255, 255, 0.8);
+			pointer-events: none;
+			&.left-shadow {
+				left: 0;
+				background: linear-gradient(
+					90deg,
+					rgb(238, 169, 203) 10%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+			&.right-shadow {
+				right: 0;
+				background: linear-gradient(
+					270deg,
+					rgb(238, 169, 203) 10%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+		}
+	}
+	.tab-content-box {
+		padding-top: 120px;
+		.tab-content {
+			min-height: 300px;
+			margin-top: 10px;
+			&:nth-child(1) {
+				background-color: red;
+			}
+			&:nth-child(2) {
+				background-color: blue;
+				min-height: 80px;
+				height: 80px;
+			}
+			&:nth-child(3) {
+				background-color: yellow;
+			}
+			&:nth-child(4) {
+				background-color: pink;
+			}
+			&:nth-child(5) {
+				background-color: green;
+			}
+		}
+	}
+}
