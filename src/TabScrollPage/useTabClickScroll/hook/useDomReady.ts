@@ -32,11 +32,11 @@ function docReady(callback: () => void) {
 	return readyDOMContentLoaded(callback);
 }
 
-export default (callback: () => void) => {
+export default function useDomReady(callback: () => void) {
 	useEffect(() => {
 		const unmount = docReady(callback);
 		return () => {
 			unmount();
 		};
 	}, []);
-};
+}

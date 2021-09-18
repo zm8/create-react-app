@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useUnmount } from '.';
 
 type El = HTMLElement | undefined | null;
