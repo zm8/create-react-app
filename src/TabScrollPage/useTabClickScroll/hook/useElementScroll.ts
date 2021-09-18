@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useGetDocumentScrollElement from './useGetDocumentScrollElement';
 
 // dom 元素Scroll 控制
 export default function useElementScroll(el: Element | string) {
+	const documentScrollElement = useGetDocumentScrollElement();
 	const [scrollTop, setScrollTop] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const isLock = useRef<boolean>(false);
@@ -30,7 +32,7 @@ export default function useElementScroll(el: Element | string) {
 
 	useEffect(() => {
 		if (!$el.current) return;
-		const $elEvt = $el.current === document.documentElement ? window : $el.current;
+		const $elEvt = $el.current === documentScrollElement ? window : $el.current;
 		window.addEventListener('resize', onScroll);
 		$elEvt.addEventListener('scroll', onScroll);
 		return () => {

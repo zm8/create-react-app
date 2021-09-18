@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useUnmount } from '.';
+import useGetDocumentScrollElement from './useGetDocumentScrollElement';
 import usePreviousValue from './usePreviousValue';
 
 type ScrollDirection = 'top' | 'bottom' | 'left' | 'right' | undefined;
 
 export default function useScrollDirection(el: Element | string) {
+	const documentScrollElement = useGetDocumentScrollElement();
 	const [scrollTop, setScrollTop] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const scrollDirection = useRef<ScrollDirection>(); // 滚动方向
@@ -42,7 +44,7 @@ export default function useScrollDirection(el: Element | string) {
 
 	useEffect(() => {
 		if (!$el.current) return;
-		const $elEvt = $el.current === document.documentElement ? window : $el.current;
+		const $elEvt = $el.current === documentScrollElement ? window : $el.current;
 		const onScroll = () => {
 			onSetScrollValue();
 		};

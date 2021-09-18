@@ -5,18 +5,18 @@ import React, { useEffect, useReducer, useState } from 'react';
 export default function TabScrollPage() {
 	const [tabCnt, setTabCnt] = useState('本日状态');
 	const [cntKey, updateCntKey] = useReducer((v) => v + 1, 0);
-	useEffect(() => {
-		const t = setTimeout(() => {
-			setTabCnt(
-				`<div style='height: 800px'><div style='background:yellow;height: 33.333%'>${tabCnt}</div></div>`
-			);
-			updateCntKey();
-		}, 3000);
-		return () => {
-			clearTimeout(t);
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	const t = setTimeout(() => {
+	// 		setTabCnt(
+	// 			`<div style='height: 800px'><div style='background:yellow;height: 33.333%'>${tabCnt}</div></div>`
+	// 		);
+	// 		updateCntKey();
+	// 	}, 3000);
+	// 	return () => {
+	// 		clearTimeout(t);
+	// 	};
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	return (
 		<div>

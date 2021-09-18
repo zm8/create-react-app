@@ -12,6 +12,7 @@ import {
 } from './hook';
 import useScrollDirection from './hook/useScrollDirection';
 import usePreviousValue from './hook/usePreviousValue';
+import useGetDocumentScrollElement from './hook/useGetDocumentScrollElement';
 
 const useTabClickScroll = ({
 	tabBoxClass,
@@ -26,15 +27,16 @@ const useTabClickScroll = ({
 	const $tabCntList = useRef<ElementList>([]);
 	const tabItemList = useRef<TabItemList>([]);
 	const tabCntList = useRef<TabCntList>([]);
+	const documentScrollElement = useGetDocumentScrollElement();
 	// 调用 useScrollDirection 最好在 useElementScroll 上,
 	// 目前由于 useScrollDirection 里有个滚动停止时重置 ScrollDirection 为 undefined,
 	// 所以不放在上面也行
-	const windowScrollDirection = useScrollDirection(document.documentElement);
+	const windowScrollDirection = useScrollDirection(documentScrollElement);
 	const {
 		scrollTop: windowScrollTop,
 		lockScroll: lockWindowScroll,
 		unLockScroll: unLockWindowScroll,
-	} = useElementScroll(document.documentElement);
+	} = useElementScroll(documentScrollElement);
 	const { scrollLeft: tabBoxScrollLeft } = useElementScroll(tabBoxClass);
 	const { windowInnerHeight, windowInnerWidth } = useGetWindowProps();
 	const [contentIndex, setContentIndex] = useState(0);
@@ -118,7 +120,7 @@ const useTabClickScroll = ({
 		if (tabCntList.current?.[index]) {
 			// 注意这里不能 lock tabBox 的滚动
 			lockWindowScroll();
-			elementScroll(document.documentElement, 0, tabCntList.current[index].top, () => {
+			elementScroll(documentScrollElement, 0, tabCntList.current[index].top, () => {
 				unLockWindowScroll();
 			});
 		}
