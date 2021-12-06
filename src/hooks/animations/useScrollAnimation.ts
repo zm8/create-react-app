@@ -48,7 +48,8 @@ export default function useScrollAnimation() {
 						topCur = Math.max(top, topCur);
 					}
 				}
-				el.scroll(leftCur, topCur);
+				el.scrollLeft = leftCur;
+				el.scrollTop = topCur;
 				if (left === leftCur && top === topCur) {
 					isNextFrameStop = true;
 				}

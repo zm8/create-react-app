@@ -104,6 +104,13 @@ const useTabClickScroll = ({
 			const tabItem = tabItemList.current[index];
 			if (tabItem) {
 				const translateLeft = tabItem.center - tabLineWidth / 2;
+				const transform = getElementProps($tabLine.current, 'transform');
+				// 首次进来不加载动画
+				if (transform === 'none') {
+					$tabLine.current.style.transition = 'none';
+				} else {
+					$tabLine.current.style.transition = '';
+				}
 				$tabLine.current.style.transform = `translateX(${translateLeft}px)`;
 			}
 		}
