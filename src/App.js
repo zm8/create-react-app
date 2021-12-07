@@ -1,11 +1,14 @@
 import React from 'react';
-import FormBox from './FormBox';
+// import FormBox from './FormBox';
 import './App.css';
+// import LearnProps from './LearnProps';
+import FormValidBox from './FormValidBox';
 
 function App() {
 	return (
 		<div className="App">
-			<FormBox />
+			<FormValidBox />
+			{/* <LearnProps /> */}
 		</div>
 	);
 }

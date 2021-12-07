@@ -2342,10 +2342,10 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-ahooks@^3.0.0-alpha.17:
-  version "3.0.0-alpha.17"
-  resolved "https://registry.npmjs.org/ahooks/-/ahooks-3.0.0-alpha.17.tgz#959af17f69c6e2779a789a3e4ed6d17af07f354d"
-  integrity sha512-m/6nuudxy9+0DlyjhKXcBAUfItxmtBThfY0wWacuteWoE2b3MS0awPg70lv2+vnos2Bx9/AfPrLbXamidqjY8g==
+ahooks@^3.0.0-alpha.18:
+  version "3.0.0-alpha.18"
+  resolved "https://registry.npmjs.org/ahooks/-/ahooks-3.0.0-alpha.18.tgz#932a8ec11f00463a8fa78246218669ee4ce9b1f4"
+  integrity sha512-d7Pk3SDCaQ5u2LinchpVuLMDtXU0JW0EdGdWZXRCTyOUXz3IvG+td8Vc3QE3165ryaATxBuF4ytV7RvoXr+iww==
   dependencies:
     dayjs "^1.9.1"
     intersection-observer "^0.7.0"
