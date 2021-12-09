@@ -1,19 +1,50 @@
-import React, { useContext, useEffect } from 'react';
+import React, { cloneElement, isValidElement, useContext, useEffect } from 'react';
 import FormContext from './FormContext';
+import { useFirstMountState, useUpdate } from 'react-use';
+import { useMemoizedFn } from 'ahooks';
 
-export default function FormItem(props) {
-	const { children, name, rule } = props;
+function FormItem(props) {
+	const { children, name, rule, initValue, onSyncErrorMsg } = props;
+	const isFirstMount = useFirstMountState();
 	const formInstance = useContext(FormContext);
+	const update = useUpdate();
+	const setValue = useMemoizedFn((value) => {
+		formInstance.setValue(name, { value });
+	});
+	const triggerValid = useMemoizedFn(() => {
+		formInstance.triggerValid(name);
+	});
+
+	if (isFirstMount) {
+		formInstance.registerModel(name, {
+			setValue,
+			value: initValue,
+			rule,
+			update,
+		});
+	}
+
+	const errorMsg = formInstance.getValue(name, 'errorMsg');
+	const value = formInstance.getValue(name, 'value');
+
 	useEffect(() => {
-		const form = formInstance.current;
-		form.registerModel(name, { rule });
-		return () => {
-			form.unregisterModel(name);
-		};
-	}, []);
-	return (
-		<>
-			<children {...formInstance.current.getModel(name)} />
-		</>
-	);
+		onSyncErrorMsg && onSyncErrorMsg(errorMsg);
+	}, [errorMsg]);
+
+	let renderChildren;
+	if (isValidElement(children)) {
+		renderChildren = cloneElement(children, {
+			value,
+			errorMsg,
+			setValue,
+			triggerValid,
+		});
+	} else {
+		renderChildren = children;
+	}
+	return renderChildren || null;
 }
+
+FormItem.displayName = 'formItem';
+
+export default React.memo(FormItem);

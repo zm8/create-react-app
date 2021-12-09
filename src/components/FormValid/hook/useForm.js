@@ -1,29 +1,15 @@
-import { useRef, useState } from 'react';
-
-class FormStore {
-	constructor({ model, forceUpdate }) {
-		this.model = model || {};
-		this.forceUpdate = forceUpdate;
-	}
-	setValue(name, value) {
-		// if (!this.model[name]) return;
-		this.model[name].value = value;
-		this.forceUpdate();
-	}
-	getValue(name) {
-		return this.model[name]?.value;
-	}
-	valid() {}
-}
+import { useRef } from 'react';
+import { useUpdate } from 'react-use';
+import FormStore from '../FormStore';
 
 export default function useForm(para = {}) {
-	const [, forceUpdate] = useState({});
+	const updateForm = useUpdate();
 	const ref = useRef();
 	if (!ref.current) {
 		ref.current = new FormStore({
+			updateForm,
 			model: para.model,
-			forceUpdate: () => forceUpdate({}),
 		});
 	}
-	return ref;
+	return ref.current;
 }

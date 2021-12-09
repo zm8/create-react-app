@@ -1,57 +1,87 @@
-import React from 'react';
+/* @refresh reset */
+import { useState } from 'react';
 import Form from 'Src/components/FormValid/Form';
 import FormItem from 'Src/components/FormValid/FormItem';
 import useForm from 'Src/components/FormValid/hook/useForm';
-
-const model = {
-	userName: {
-		value: 'hello',
-		rule: (value) => {
-			if (!value) return '请输入姓名';
-		},
-	},
-	tel: {
-		value: '13456789',
-		rule: (value) => {
-			if (!value) return '请输入电话号码';
-			if (value.length < 10) {
-				return '请输入10个号码';
-			}
-		},
-	},
-};
+import InputAge from './components/InputAge';
+import InputEmail from './components/InputEmail';
+import InputName from './components/InputName';
+import InputTel from './components/InputTel';
 
 export default function FormValidBox() {
-	const formRef = useForm({
-		model,
-	});
-
-	console.log('2222', formRef.current.getValue('userName'));
+	const formInstance = useForm();
 	return (
 		<div>
-			<div style={{ margin: '10px 0' }}>
-				<span>用户名:</span>
-				<input
-					value={formRef.current.getValue('userName')}
-					onChange={(e) => {
-						console.log(e.target.value);
-						formRef.current.setValue('userName', e.target.value);
+			<Form ref={formInstance}>
+				<FormItem
+					initValue="Hello"
+					name="userName"
+					rule={(value) => {
+						if (!value) return '请输入用户名';
 					}}
-					onBlur={() => {
-						formRef.current.valid();
+				>
+					<InputName />
+				</FormItem>
+				<FormItem
+					name="tel"
+					rule={(value) => {
+						if (!value) return '请输入电话号码';
+						if (value.length < 5) {
+							return '请至少输入5个数字';
+						}
 					}}
-				/>
+				>
+					<InputTel />
+				</FormItem>
+
+				<FormItemSync />
+
+				<button
+					style={{ marginTop: 10 }}
+					onClick={() => {
+						formInstance.onSubmit((err, data) => {
+							if (err) {
+								alert(err);
+								return;
+							}
+							console.log(data);
+						});
+					}}
+				>
+					提交
+				</button>
+			</Form>
+		</div>
+	);
+}
+
+function FormItemSync() {
+	const [errMsgEmail, setErrMsgEmail] = useState('');
+	const [errMsgTel, setErrMsgTel] = useState('');
+	const isErr = errMsgEmail || errMsgTel;
+	return (
+		<div>
+			<div style={isErr ? { border: '1px solid red' } : { border: '1px solid blue' }}>
+				<FormItem
+					name="email"
+					rule={(value) => {
+						if (!value) return '请输入邮件';
+					}}
+					onSyncErrorMsg={(errorMsg) => setErrMsgEmail(errorMsg)}
+				>
+					<InputEmail />
+				</FormItem>
+				<FormItem
+					name="age"
+					rule={(value) => {
+						if (!value) return '请输入年龄';
+					}}
+					onSyncErrorMsg={(errorMsg) => setErrMsgTel(errorMsg)}
+				>
+					<InputAge />
+				</FormItem>
 			</div>
-			<div style={{ margin: '10px 0' }}>
-				<span>电话号码:</span>
-				<input
-					value={formRef.current.getValue('tel')}
-					onChange={(e) => {
-						formRef.current.setValue('userName', e.target.value);
-					}}
-				/>
-			</div>
-			<button>提交</button>
+			<div>{isErr && <div style={{ color: 'red' }}>{isErr}</div>}</div>
 		</div>
 	);
 }
