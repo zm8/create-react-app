@@ -1,16 +1,20 @@
 import React from 'react';
 import { useToggle } from 'react-use';
-// import FormBox from './FormBox';
 import './App.css';
-// import LearnProps from './LearnProps';
-import FormValidBox from './FormValidBox';
+import { Provider, createStore } from './components/FormValidate/FormStore';
+import Formzustand from './Formzustand';
 
 function App() {
 	const [on, toggle] = useToggle(true);
+
 	return (
 		<div className="App">
-			{on && <FormValidBox />}
-			<button onClick={toggle} style={{ margin: '100px 0' }}>
+			{on && (
+				<Provider createStore={createStore}>
+					<Formzustand />
+				</Provider>
+			)}
+			<button onClick={toggle} style={{ position: 'absolute', top: 100 }}>
 				切换显示隐藏
 			</button>
 			{/* <LearnProps /> */}
