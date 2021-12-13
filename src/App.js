@@ -17,7 +17,6 @@ function App() {
 			<button onClick={toggle} style={{ position: 'absolute', top: 100 }}>
 				切换显示隐藏
 			</button>
-			{/* <LearnProps /> */}
 		</div>
 	);
 }
