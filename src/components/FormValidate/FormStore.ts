@@ -1,13 +1,7 @@
 import createContext from 'zustand/context';
 import { produce } from 'immer';
 import type { Draft } from 'immer';
-import create, {
-	GetState,
-	SetState,
-	State,
-	StateCreator,
-	StoreApi,
-} from 'zustand';
+import create, { GetState, SetState, State, StateCreator, StoreApi } from 'zustand';
 import _ from 'lodash';
 
 const immer =
@@ -19,10 +13,7 @@ const immer =
 	>(
 		config: StateCreator<
 			T,
-			(
-				partial: ((draft: Draft<T>) => void) | T,
-				replace?: boolean
-			) => void,
+			(partial: ((draft: Draft<T>) => void) | T, replace?: boolean) => void,
 			CustomGetState,
 			CustomStoreApi
 		>
@@ -60,8 +51,7 @@ interface FormState {
 
 const { Provider, useStore } = createContext<FormState>();
 
-const findModel = (state: FormState, name: string) =>
-	_.find(state.models, { name });
+const findModel = (state: FormState, name: string) => _.find(state.models, { name });
 
 const createStore = () => {
 	const store = create<FormState>(
@@ -116,7 +106,7 @@ const createStore = () => {
 					// 	errorMsg: '',
 					// });
 					const { rule, value } = model;
-					const errorMsg = await rule!(value);
+					const errorMsg = await rule?.(value);
 					setModelValue(name, {
 						status: errorMsg ? 'error' : 'success',
 						errorMsg,

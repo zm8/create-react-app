@@ -1,23 +1,20 @@
-import React from 'react';
-import { useToggle } from 'react-use';
+import React, { useRef } from 'react';
 import './App.css';
-import { Provider, createStore } from './components/FormValidate/FormStore';
-import Formzustand from './Formzustand';
+import Form from './components/Form';
+import FormItem from './components/Form';
 
 function App() {
-	const [on, toggle] = useToggle(true);
-
+	const formRef = useRef();
 	return (
 		<div className="App">
-			{on && (
-				<Provider createStore={createStore}>
-					<Formzustand />
-				</Provider>
-			)}
-			<button onClick={toggle} style={{ position: 'absolute', top: 100 }}>
-				切换显示隐藏
-			</button>
-			{/* <LearnProps /> */}
+			<Form ref={formRef}>
+				<FormItem label="我是"></FormItem>
+				<FormItem label="我想对大家说"></FormItem>
+				<div style={{ display: 'flex' }}>
+					<button value="提交" />
+					<button value="重置" />
+				</div>
+			</Form>
 		</div>
 	);
 }
