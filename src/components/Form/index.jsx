@@ -18,18 +18,15 @@ export default class Form extends React.Component {
 	render = () => {
 		return (
 			<div>
-				{React.Children.map(this.props.children, (item) => {
-					if (
-						React.isValidElement(item) &&
-						item.type.displayName === 'formItem'
-					) {
+				{React.Children.map(this.props.children, (child) => {
+					if (child.type.displayName === 'formItem') {
 						return React.cloneElement(
-							item,
+							child,
 							{
-								value: this.state[item.props.name] || '',
+								value: this.state[child.props.name] || '',
 								handleChange: this.onChange,
 							},
-							item.props.children
+							child.props.children
 						);
 					}
 					return null;
